@@ -12,15 +12,15 @@ MAIN_PROG CODE                      ; let linker place main program
  k equ 0x32
 ;inicio del programa: 
 START
-MOVLW 0x07 ;Apagar comparadores
+MOVLW 0x07
 MOVWF CMCON
  
  
-BCF STATUS, RP1 ;Cambiar al banco 1
+BCF STATUS, RP1 
 BSF STATUS, RP0 
-MOVLW b'00000000' ;Establecer puerto B como salida (los 8 bits del puerto)
+MOVLW b'00000000' 
 MOVWF TRISB 
-BCF STATUS, RP0 ;Regresar al banco 0
+BCF STATUS, RP0 
 BCF PORTB, 3
 BCF PORTB, 1
 BCF PORTB, 2
@@ -28,7 +28,7 @@ BCF PORTB, 4
 BCF PORTB, 5
 BSF PORTB, 0
 
- INICIO
+inicio:
 BSF PORTB, 0 
 BSF PORTB, 5 
  nop
@@ -54,24 +54,24 @@ BSF PORTB, 5
  nop
  nop
  nop
-call tiempo3 
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
+call ti3 
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
 BCF PORTB, 0 
 BSF PORTB, 1 
 nop
 nop
 nop
 nop
-call tiempo3
-call tiempo3
+call ti3
+call ti3
 BCF PORTB, 1 
 BSF PORTB, 2  
 BCF PORTB, 5 
@@ -102,32 +102,32 @@ nop
 nop
 nop
 nop
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
-call tiempo3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
+call ti3
 BCF PORTB, 3 
 BSF PORTB, 4
 nop
 nop
 nop
 nop
-call tiempo3
-call tiempo3
+call ti3
+call ti3
 BCF PORTB, 4 
 BSF PORTB, 5
 BCF PORTB, 2
-GOTO INICIO
+GOTO inicio
  
  
 			
-tiempo3:
+ti3:
     nop
     nop
     nop
@@ -143,7 +143,7 @@ tiempo3:
 movlw d'60'
 movwf i
 	
-iloop: movlw d'54'
+loopi: movlw d'54'
 	movwf j
 	    nop
 	    nop
@@ -161,16 +161,16 @@ iloop: movlw d'54'
 	   
 	
 	
-jloop: movlw d'50'
+loopj: movlw d'50'
        movwf k
       
        
-kloop: decfsz k, f
-	goto kloop
+loopk: decfsz k, f
+	goto loopk
 	decfsz j, f
-	goto jloop
+	goto loopj
 	decfsz i, f
-	goto iloop
+	goto loopi
 		
 	return
     END
